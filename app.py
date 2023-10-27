@@ -19,13 +19,15 @@ def get_chatgpt_response(messages):
 
     return response['choices'][0]['message']['content']
 
-@app.route('/chatgpt/chat', methods=['POST'])
+@app.route("/chatgpt/chat", methods=["POST"])
+@cross_origin()
 def getChatResponse():
     messages = request.json['messages']
     print(messages)
     load_dotenv()
     openai.api_key = os.getenv("OPENAI_API_KEY")
     model_response = get_chatgpt_response(messages)
+    print(model_response)
     return {"data": model_response}
 
 @app.route("/chatgpt/corstest", methods=["POST"])
