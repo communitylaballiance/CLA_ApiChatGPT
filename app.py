@@ -29,7 +29,7 @@ def getChatResponse():
     return {"data": model_response}
 
 @app.route("/chatgpt/corstest", methods=["POST"])
-@cross_origin()
+# @cross_origin()
 def helloWorld():
   test = request.json['test']
   return {"answer": test}
