@@ -8,7 +8,7 @@ import openai
 import os
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 def get_chatgpt_response(messages):
     response = openai.ChatCompletion.create(
