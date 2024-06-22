@@ -11,12 +11,13 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 def get_chatgpt_response(messages):
-    response = openai.ChatCompletion.create(
-        model='gpt-4',
-        messages=messages
+    # Call the chat completion endpoint
+    response = openai.chat.completions.create(
+        messages=messages,
+        model="gpt-3.5-turbo",
     )
-
-    return response['choices'][0]['message']['content']
+    response_message = response.choices[0].message.content
+    return response_message
 
 @app.route("/chatgpt/chat", methods=["POST"])
 def getChatResponse():
@@ -30,3 +31,9 @@ def getChatResponse():
 @app.route('/')
 def main():
     return {"api_test": "Ok"}
+
+
+
+
+
+
